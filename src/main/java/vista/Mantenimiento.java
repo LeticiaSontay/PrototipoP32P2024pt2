@@ -5,9 +5,9 @@
  */
 package vista;
 
-import modelo.EmpleadoDAO;
+import modelo.PeliculasDAO;
+import controlador.Peliculas;
 import modelo.CursosDAO;
-import controlador.Empleado;
 import controlador.Cursos;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -32,30 +32,40 @@ public class Mantenimiento extends javax.swing.JInternalFrame {
 
     public void llenadoDeTablas() {
         DefaultTableModel modelo = new DefaultTableModel();
-        modelo.addColumn("ID Curso");
         modelo.addColumn("nombre");
-        modelo.addColumn("Estatus");
-        CursosDAO cursoDAO = new CursosDAO();
-        List<Cursos> cursos = cursoDAO.select();
+        modelo.addColumn("clasifiacion");
+        modelo.addColumn("subtitulado");
+        modelo.addColumn("idioma");
+        modelo.addColumn("tipo");
+        modelo.addColumn("precio");
+        PeliculasDAO peliculaDAO = new PeliculasDAO();
+        List<Peliculas> peliculas = peliculaDAO.select();
         tablaVendedores.setModel(modelo);
-        String[] dato = new String[3];
-        for (int i = 0; i < cursos.size(); i++) {
-            dato[0] = cursos.get(i).getCodigo_curso();
-            dato[1] = cursos.get(i).getNombre_curso();
-            dato[2] = cursos.get(i).getEstatus_curso();
+        String[] dato = new String[6];
+        for (int i = 0; i < peliculas.size(); i++) {
+            dato[0] = peliculas.get(i).getNombre();
+            dato[1] = peliculas.get(i).getClasificacion();
+            dato[2] = peliculas.get(i).getSubtitulado();
+            dato[3] = peliculas.get(i).getIdioma();
+            dato[4] = peliculas.get(i).getTipo();
+            dato[5] = peliculas.get(i).getPrecio();
+
             //System.out.println("vendedor:" + vendedores);
             modelo.addRow(dato);
         }
     }
 
     public void buscarVendedor() {
-        Cursos cursoAConsultar = new Cursos();
-        CursosDAO cursoDAO = new CursosDAO();
-        cursoAConsultar.setCodigo_curso((txtbuscado.getText()));
-        cursoAConsultar = cursoDAO.query(cursoAConsultar);
-        txtCodigo.setText(cursoAConsultar.getCodigo_curso());
-        txtNombre.setText(cursoAConsultar.getNombre_curso());
-        txtEstatus.setText(cursoAConsultar.getEstatus_curso());
+        Peliculas peliculaAConsultar = new Peliculas();
+        PeliculasDAO peliculaDAO = new PeliculasDAO();
+        peliculaAConsultar.setNombre((txtbuscado.getText()));
+        peliculaAConsultar = peliculaDAO.query(peliculaAConsultar);
+        txtnombre.setText(peliculaAConsultar.getNombre());
+        txtclasificacion.setText(peliculaAConsultar.getClasificacion());
+        txtsubtitulado.setText(peliculaAConsultar.getSubtitulado());
+        txtidioma.setText(peliculaAConsultar.getIdioma());
+        txttipo.setText(peliculaAConsultar.getTipo());
+        txtprecio.setText(peliculaAConsultar.getPrecio());
     }
 
     public Mantenimiento() {
@@ -82,19 +92,25 @@ public class Mantenimiento extends javax.swing.JInternalFrame {
         btnModificar = new javax.swing.JButton();
         label3 = new javax.swing.JLabel();
         txtbuscado = new javax.swing.JTextField();
-        txtNombre = new javax.swing.JTextField();
+        txtclasificacion = new javax.swing.JTextField();
         btnLimpiar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaVendedores = new javax.swing.JTable();
         cbox_empleado = new javax.swing.JComboBox<>();
         label4 = new javax.swing.JLabel();
-        txtEstatus = new javax.swing.JTextField();
+        txtsubtitulado = new javax.swing.JTextField();
         label5 = new javax.swing.JLabel();
         lb = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         label6 = new javax.swing.JLabel();
-        txtCodigo = new javax.swing.JTextField();
+        txtnombre = new javax.swing.JTextField();
+        label7 = new javax.swing.JLabel();
+        label8 = new javax.swing.JLabel();
+        label9 = new javax.swing.JLabel();
+        txtidioma = new javax.swing.JTextField();
+        txtprecio = new javax.swing.JTextField();
+        txttipo = new javax.swing.JTextField();
 
         lb2.setForeground(new java.awt.Color(204, 204, 204));
         lb2.setText(".");
@@ -103,7 +119,7 @@ public class Mantenimiento extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
-        setTitle("Mantenimiento Cursos");
+        setTitle("Mantenimiento Peliculas");
         setVisible(true);
 
         btnEliminar.setText("Eliminar");
@@ -128,7 +144,7 @@ public class Mantenimiento extends javax.swing.JInternalFrame {
         });
 
         label1.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        label1.setText("Cursos");
+        label1.setText("Peliculas");
 
         btnModificar.setText("Modificar");
         btnModificar.addActionListener(new java.awt.event.ActionListener() {
@@ -138,10 +154,10 @@ public class Mantenimiento extends javax.swing.JInternalFrame {
         });
 
         label3.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        label3.setText("Codigo");
+        label3.setText("Nombre");
 
-        txtNombre.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtNombre.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
+        txtclasificacion.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        txtclasificacion.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
 
         btnLimpiar.setText("Limpiar");
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
@@ -179,11 +195,11 @@ public class Mantenimiento extends javax.swing.JInternalFrame {
         label4.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         label4.setText("Empleado:");
 
-        txtEstatus.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtEstatus.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
+        txtsubtitulado.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        txtsubtitulado.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
 
         label5.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        label5.setText("Estatus");
+        label5.setText("Subtitulado");
 
         lb.setForeground(new java.awt.Color(204, 204, 204));
         lb.setText(".");
@@ -198,10 +214,28 @@ public class Mantenimiento extends javax.swing.JInternalFrame {
         });
 
         label6.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
-        label6.setText("Nombre");
+        label6.setText("Clasificacion");
 
-        txtCodigo.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        txtCodigo.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
+        txtnombre.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        txtnombre.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
+
+        label7.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        label7.setText("Idioma");
+
+        label8.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        label8.setText("Tipo");
+
+        label9.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        label9.setText("Precio");
+
+        txtidioma.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        txtidioma.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
+
+        txtprecio.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        txtprecio.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
+
+        txttipo.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        txttipo.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -209,6 +243,20 @@ public class Mantenimiento extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(label7)
+                            .addComponent(label5)
+                            .addComponent(label8)
+                            .addComponent(label9))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(txtprecio, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(17, 17, 17)
+                                .addComponent(txttipo, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(29, 29, 29)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -225,27 +273,22 @@ public class Mantenimiento extends javax.swing.JInternalFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(17, 17, 17)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(label5)
-                                    .addComponent(label3))
-                                .addGap(22, 22, 22))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(label6)
-                                .addGap(18, 18, 18)))
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(label3)
+                            .addComponent(label6))
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtEstatus, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)
-                            .addComponent(txtNombre)
-                            .addComponent(txtCodigo))
+                            .addComponent(txtsubtitulado, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)
+                            .addComponent(txtclasificacion)
+                            .addComponent(txtnombre)
+                            .addComponent(txtidioma))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lb, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 636, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 627, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -279,17 +322,29 @@ public class Mantenimiento extends javax.swing.JInternalFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(22, 22, 22)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(label3))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtclasificacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(label6))
                                         .addGap(18, 18, 18)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtEstatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtsubtitulado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(label5)))
                                     .addComponent(lb))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(label7)
+                                    .addComponent(txtidioma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(label8)
+                                    .addComponent(txttipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(label9)
+                                    .addComponent(txtprecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(btnRegistrar)
@@ -316,21 +371,24 @@ public class Mantenimiento extends javax.swing.JInternalFrame {
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         // TODO add your handling code here:
-        CursosDAO cursoDAO = new CursosDAO();
-        Cursos cursoAEliminar = new Cursos();
-        cursoAEliminar.setCodigo_curso(txtbuscado.getText());
-        cursoDAO.delete(cursoAEliminar);
+        PeliculasDAO peliculaDAO = new PeliculasDAO();
+        Peliculas peliculaAEliminar = new Peliculas();
+        peliculaAEliminar.setNombre(txtbuscado.getText());
+        peliculaDAO.delete(peliculaAEliminar);
         llenadoDeTablas();
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        CursosDAO cursoDAO = new CursosDAO();
-        Cursos cursoAInsertar = new Cursos();
-        cursoAInsertar.setCodigo_curso(txtCodigo.getText());
+        PeliculasDAO peliculaDAO = new PeliculasDAO();
+        Peliculas peliculaAInsertar = new Peliculas();
+        peliculaAInsertar.setNombre(txtnombre.getText());
         
-        cursoAInsertar.setNombre_curso(txtNombre.getText());
-        cursoAInsertar.setEstatus_curso(txtEstatus.getText());
-        cursoDAO.insert(cursoAInsertar);
+        peliculaAInsertar.setClasificacion(txtclasificacion.getText());
+        peliculaAInsertar.setSubtitulado(txtsubtitulado.getText());
+        peliculaAInsertar.setIdioma(txtidioma.getText());
+        peliculaAInsertar.setTipo(txttipo.getText());
+        peliculaAInsertar.setPrecio(txtprecio.getText());
+        peliculaDAO.insert(peliculaAInsertar);
         llenadoDeTablas();
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
@@ -341,20 +399,23 @@ public class Mantenimiento extends javax.swing.JInternalFrame {
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
 //        // TODO add your handling code here:
-        CursosDAO cursoDAO = new CursosDAO();
-        Cursos cursoAActualizar = new Cursos();
-        cursoAActualizar.setCodigo_curso(txtbuscado.getText());
-        cursoAActualizar.setNombre_curso(txtNombre.getText());
-        cursoAActualizar.setEstatus_curso(txtEstatus.getText());
-        cursoDAO.update(cursoAActualizar);
+        PeliculasDAO peliculaDAO = new PeliculasDAO();
+        Peliculas peliculaAActualizar = new Peliculas();
+        peliculaAActualizar.setNombre(txtbuscado.getText());
+        peliculaAActualizar.setClasificacion(txtclasificacion.getText());
+        peliculaAActualizar.setSubtitulado(txtsubtitulado.getText());
+        peliculaAActualizar.setIdioma(txtidioma.getText());
+        peliculaAActualizar.setTipo(txttipo.getText());
+        peliculaAActualizar.setPrecio(txtprecio.getText());
+        peliculaDAO.update(cursoAActualizar);
         llenadoDeTablas();
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
         cbox_empleado.setSelectedIndex(0);
-        txtCodigo.setText("");
-        txtNombre.setText("");
-        txtEstatus.setText("");
+        txtclasificacion.setText("");
+        txtclasificacion.setText("");
+        txtsubtitulado.setText("");
         txtbuscado.setText("");
         btnRegistrar.setEnabled(true);
         btnModificar.setEnabled(true);
@@ -401,13 +462,19 @@ public class Mantenimiento extends javax.swing.JInternalFrame {
     private javax.swing.JLabel label4;
     private javax.swing.JLabel label5;
     private javax.swing.JLabel label6;
+    private javax.swing.JLabel label7;
+    private javax.swing.JLabel label8;
+    private javax.swing.JLabel label9;
     private javax.swing.JLabel lb;
     private javax.swing.JLabel lb2;
     private javax.swing.JLabel lbusu;
     private javax.swing.JTable tablaVendedores;
-    private javax.swing.JTextField txtCodigo;
-    private javax.swing.JTextField txtEstatus;
-    private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtbuscado;
+    private javax.swing.JTextField txtclasificacion;
+    private javax.swing.JTextField txtidioma;
+    private javax.swing.JTextField txtnombre;
+    private javax.swing.JTextField txtprecio;
+    private javax.swing.JTextField txtsubtitulado;
+    private javax.swing.JTextField txttipo;
     // End of variables declaration//GEN-END:variables
 }
