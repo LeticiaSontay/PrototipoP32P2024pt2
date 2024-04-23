@@ -42,9 +42,7 @@ public class MdiGeneral extends javax.swing.JFrame {
         menuCerrar_sesion = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        Mantenimiento_Secciones = new javax.swing.JMenuItem();
+        mantenimientopelicula = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
         jMenu6 = new javax.swing.JMenu();
@@ -90,24 +88,13 @@ public class MdiGeneral extends javax.swing.JFrame {
             }
         });
 
-        jMenuItem3.setText("Mantenimiento Cursos");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        mantenimientopelicula.setText("Mantenimiento Peliculas");
+        mantenimientopelicula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
+                mantenimientopeliculaActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem3);
-
-        jMenuItem4.setText("Mantenimiento Alumnos");
-        jMenu3.add(jMenuItem4);
-
-        Mantenimiento_Secciones.setText("Mantenimiento Secciones");
-        Mantenimiento_Secciones.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Mantenimiento_SeccionesActionPerformed(evt);
-            }
-        });
-        jMenu3.add(Mantenimiento_Secciones);
+        jMenu3.add(mantenimientopelicula);
 
         jMenu1.add(jMenu3);
 
@@ -141,29 +128,24 @@ public class MdiGeneral extends javax.swing.JFrame {
     private void jMenu3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu3ActionPerformed
         // TODO add your handling code here:
 
-    }//GEN-LAST:event_jMenu3ActionPerformed
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        // TODO add your handling code here:
-        MantenimientoCursos ventana = new MantenimientoCursos();
-        jDesktopPane1.add(ventana);
-        Dimension desktopSize = jDesktopPane1.getSize();
-        Dimension FrameSize = ventana.getSize();
-        ventana.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    }//GEN-LAST:event_jMenu3ActionPerformed
 
     private void menuAbrir_sesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAbrir_sesionActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_menuAbrir_sesionActionPerformed
 
-    private void Mantenimiento_SeccionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Mantenimiento_SeccionesActionPerformed
-        // TODO add your handling code here:
-        MantenimientoSecciones ventana = new MantenimientoSecciones();
+    private void mantenimientopeliculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mantenimientopeliculaActionPerformed
+  Mantenimiento ventana = new Mantenimiento();
         jDesktopPane1.add(ventana);
         Dimension desktopSize = jDesktopPane1.getSize();
         Dimension FrameSize = ventana.getSize();
         ventana.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
-    }//GEN-LAST:event_Mantenimiento_SeccionesActionPerformed
+    
+        
+        
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mantenimientopeliculaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -201,7 +183,6 @@ public class MdiGeneral extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem Mantenimiento_Secciones;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
@@ -212,8 +193,7 @@ public class MdiGeneral extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem mantenimientopelicula;
     private javax.swing.JMenuItem menuAbrir_sesion;
     private javax.swing.JMenuItem menuCerrar_sesion;
     // End of variables declaration//GEN-END:variables
