@@ -7,8 +7,6 @@ package vista;
 
 import modelo.PeliculasDAO;
 import controlador.Peliculas;
-import modelo.CursosDAO;
-import controlador.Cursos;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import java.io.File;
@@ -407,15 +405,18 @@ public class Mantenimiento extends javax.swing.JInternalFrame {
         peliculaAActualizar.setIdioma(txtidioma.getText());
         peliculaAActualizar.setTipo(txttipo.getText());
         peliculaAActualizar.setPrecio(txtprecio.getText());
-        peliculaDAO.update(cursoAActualizar);
+        peliculaDAO.update(peliculaAActualizar);
         llenadoDeTablas();
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
         cbox_empleado.setSelectedIndex(0);
-        txtclasificacion.setText("");
+        txtnombre.setText("");
         txtclasificacion.setText("");
         txtsubtitulado.setText("");
+        txtidioma.setText("");
+        txttipo.setText("");
+        txtprecio.setText("");
         txtbuscado.setText("");
         btnRegistrar.setEnabled(true);
         btnModificar.setEnabled(true);
